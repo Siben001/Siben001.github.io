@@ -14,7 +14,7 @@ function day_quote()
 	arr1 = arr;
 	for (var i=0;i<3;i++)
 	{	
-		document.getElementById('info').innerHTML = arr1[i];
+		document.getElementById('info').innerHTML = arr[i];
 	}
 
 }
