@@ -3,15 +3,15 @@ arr[0] = 'All successful men and women are big dreamers. They imagine what their
 arr[1] = 'Genius is one percent inspiration and ninety-nine percent perspiration. – Thomas Edison';
 arr[2] = 'You can observe a lot just by watching. – Yogi Berra';
 var pos;
-var arr1 = [];
+var arr1 = JSON.parse(JSON.stringify(arr));
 
 function day_quote()
 {
 	
 	pos = Math.round(Math.random()*(arr.length-1));
 	document.getElementById('info').innerHTML = arr[pos];
-	arr1 = JSON.parse(JSON.stringify(arr));
 	arr1.splice(pos,1);
+	allert(arr1)
 }
 
 function sort_quote()
