@@ -1,4 +1,5 @@
 var arr = [];
+var pos;
 
 function day_quote()
 {
@@ -6,9 +7,9 @@ function day_quote()
 	arr[1] = 'Genius is one percent inspiration and ninety-nine percent perspiration. – Thomas Edison';
 	arr[2] = 'You can observe a lot just by watching. – Yogi Berra';
 	var arr1 = [];
-	var pos;
-	por = Math.round(Math.random()*(arr.length-1));
-	document.getElementById('info').innerHTML = arr[pos1];
+
+	pos = Math.round(Math.random()*(arr.length-1));
+	document.getElementById('info').innerHTML = arr[pos];
 }
 
 function sort_quote()
