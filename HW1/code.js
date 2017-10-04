@@ -10,6 +10,9 @@ function day_quote()
 
 	pos = Math.round(Math.random()*(arr.length-1));
 	document.getElementById('info').innerHTML = arr[pos];
+	arr1 = JSON.parse(JSON.stringify(arr));
+	allert(arr);
+	allert(arr1);
 }
 
 function sort_quote()
