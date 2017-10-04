@@ -11,8 +11,11 @@ function day_quote()
 	pos = Math.round(Math.random()*(arr.length-1));
 	document.getElementById('info').innerHTML = arr[pos];
 	arr1 = JSON.parse(JSON.stringify(arr));
-	allert(window.arr);
-	allert(arr1);
+	for (var i=0;i<3;i++)
+	{	
+		document.getElementById('info').innerHTML = arr1[i];
+	}
+
 }
 
 function sort_quote()
