@@ -12,8 +12,6 @@ function day_quote()
 	document.getElementById('info').innerHTML = arr[pos];
 	arr1 = JSON.parse(JSON.stringify(arr));
 	arr1.splice(pos,1);
-	allert(arr);
-	allert(arr1);
 }
 
 function sort_quote()
