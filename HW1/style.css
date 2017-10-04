@@ -1,13 +1,17 @@
 body {
-  margin: 5px 10px 20px;
   font-family: 'Open Sans', sans-serif;
   max-width: 960px;
 }
 
 h1 {
+  margin: 5px 10px 20px;
   color: #1946ba;
   font-style: normal;
 
+}
+
+h2 {
+    margin: 5px 10px 20px;
 }
 
 blockquote {
