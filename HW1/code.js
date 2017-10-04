@@ -1,5 +1,6 @@
 var arr = [];
 var pos;
+var arr1 = []
 
 function day_quote()
 {
@@ -10,10 +11,10 @@ function day_quote()
 
 	pos = Math.round(Math.random()*(arr.length-1));
 	document.getElementById('info').innerHTML = arr[pos];
-	arr1 = JSON.parse(JSON.stringify(arr));
+	arr1 = arr.splice(pos,1);
 	for (var i=0;i<3;i++)
 	{	
-		document.getElementById('info').innerHTML = arr1[i];
+			document.getElementById('info').innerHTML = arr1[i];
 	}
 
 }
