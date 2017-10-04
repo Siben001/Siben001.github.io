@@ -11,7 +11,7 @@ function day_quote()
 	pos = Math.round(Math.random()*(arr.length-1));
 	document.getElementById('info').innerHTML = arr[pos];
 	arr1.splice(pos,1);
-	allert(arr1)
+	allert(arr1);
 }
 
 function sort_quote()
