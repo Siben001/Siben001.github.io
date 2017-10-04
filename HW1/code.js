@@ -12,6 +12,7 @@ function day_quote()
 	document.getElementById('info').innerHTML = arr[pos];
 	arr1 = arr.slice(0);
 	arr1.splice(pos,1);
+	allert(arr);
 	allert(arr1);
 }
 
