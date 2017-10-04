@@ -8,8 +8,8 @@ var arr1 = [];
 function day_quote()
 {
 	
-	pos = Math.round(Math.random()*(arr.length-1));
-	document.getElementById('info').innerHTML = arr[pos];
+	var pos1 = Math.round(Math.random()*(arr.length-1));
+	document.getElementById('info').innerHTML = arr[pos1];
 }
 
 function sort_quote()
