@@ -1,6 +1,5 @@
 var arr = [];
 var pos;
-var arr1 = []
 
 function day_quote()
 {
