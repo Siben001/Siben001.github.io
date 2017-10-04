@@ -9,14 +9,14 @@ function day_quote()
 	arr[0] = 'You can observe a lot just by watching. – Yogi Berra';
 	pos = Math.round(Math.random()*(arr.length-1));
 	document.getElementById('main_q').innerHTML = arr[pos];
-	for (var i=0;i<3;i++)
-	{	
-		document.getElementById('info_'+i).innerHTML = arr[i];
-	}
 
 }
 
 function sort_quote()
 {
-	
+	arr.sort();
+	for (var i=0;i<3;i++)
+	{	
+		document.getElementById('info_'+i).innerHTML = arr[i];
+	}
 }
