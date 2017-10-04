@@ -4,12 +4,11 @@ var arr1 = []
 
 function day_quote()
 {
-	arr[0] = 'All successful men and women are big dreamers. They imagine what their future could be, ideal in every respect, and then they work every day toward their distant vision, that goal or purpose.” – Brian Tracy';
+	arr[2] = 'All successful men and women are big dreamers. They imagine what their future could be, ideal in every respect, and then they work every day toward their distant vision, that goal or purpose.” – Brian Tracy';
 	arr[1] = 'Genius is one percent inspiration and ninety-nine percent perspiration. – Thomas Edison';
-	arr[2] = 'You can observe a lot just by watching. – Yogi Berra';
+	arr[0] = 'You can observe a lot just by watching. – Yogi Berra';
 	pos = Math.round(Math.random()*(arr.length-1));
 	document.getElementById('info').innerHTML = arr[pos];
-	arr1 = arr;
 	for (var i=1;i<3;i++)
 	{	
 		document.getElementById('info_'+i).innerHTML = arr[i];
