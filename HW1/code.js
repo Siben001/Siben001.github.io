@@ -6,7 +6,6 @@ var pos;
 
 function day_quote()
 {
-
 	pos = Math.round(Math.random()*(arr.length-1));
 	document.getElementById('main_q').innerHTML = arr[pos];
 
