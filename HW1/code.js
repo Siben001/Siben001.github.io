@@ -10,10 +10,9 @@ function day_quote()
 	pos = Math.round(Math.random()*(arr.length-1));
 	document.getElementById('info').innerHTML = arr[pos];
 	arr1 = arr;
-	document.getElementById('info_1').innerHTML = ('<blockquote>' + arr[0] + '</blockquote>');
 	for (var i=1;i<3;i++)
 	{	
-		document.getElementById('info_1').innerHTML += ('<blockquote>' + arr[i] + '</blockquote>');
+		document.getElementById('info_'+i).innerHTML = arr[i];
 	}
 
 }
