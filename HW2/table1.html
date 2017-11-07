@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+  <body>
+   <style> 
+  .odd{background-color: white;} 
+  .even{background-color: grey;} 
+  </style>
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+    <script>
+
+	
+      d3.json("https://raw.githubusercontent.com/avt00/dvcourse/master/countries_2012.json", function(error, data){
+        
+        var columns = ["name","continent","gdp","life_expectancy", "population", "year"];
+
+        var table = d3.select("body").append("table"),
+          thead = table.append("thead")
+                       .attr("class", "thead");
+          tbody = table.append("tbody");
+
+        table.append("caption")
+          .html("World Countries Ranking");
+
+        thead.append("tr").selectAll("th")
+          .data(columns)
+        .enter()
+          .append("th")
+          .text(function(d) { return d; })
+          .on("click", function(header, i) {
+            tbody.selectAll("tr").sort(function(a, b) {
+			  switch (header){
+			     case "name":
+				 case "gdp":
+				 return d3.descending(a[header], b[header]);
+				 break;
+				 case "continent":
+				   if (a[header]<b[header]) {return d3.descending(a[header], b[header]);}
+				   if (a[header]>b[header]) {return d3.descending(a[header], b[header]);}
+				   if (a[header]=b[header]) {
+				      return d3.descending(a['name'], b['name']);}
+                 break;
+			    case "life_expectancy":
+				case "population":
+				case "year":
+				    return b[header]-a[header];
+			   	break;
+			   }
+            });
+          });
+
+        
+		var rows = tbody.selectAll("tr.row")
+          .data(data)
+          .enter()
+          .append("tr").attr("class", "row")
+		  .attr("class", function (d,i) {
+		  if(i % 2 == 0){return "odd";}
+		  else return "even";})
+		  
+		  .style("text-align", "center")
+		  ;
+		
+
+		var f = d3.format(",.1f");
+		var f1 = d3.format(">,.0f");
+		var f2 = d3.formatPrefix(",.0", 1e9);
+		var f3 = d3.format("^");
+        var cells = rows.selectAll("td")
+          .data(function(row) {
+              return d3.range(columns.length).map(function(column, i) {
+			  switch (columns[i]){
+			  case "life_expectancy":
+			      return f(row[columns[i]]);
+				  console.log(this.parentNode)
+				  d3.select().style("text-align", "right");
+				  break;
+			  case "population":
+			      return f1(row[columns[i]]);
+				  break;
+			  case "gdp":
+			      return f2(row[columns[i]]);
+				  break;
+              default:
+			     return row[columns[i]];
+				 break;
+			 }
+              });
+          })
+          .enter()
+          .append("td")
+		  .text(function(d) { return d; })
+          .on("mouseover", function(d, i) {
+
+            d3.select(this.parentNode)
+              .style("background-color", "#F3ED86");
+        
+          }).on("mouseout", function() {
+
+            tbody.selectAll("tr")
+			  .style("background-color", null)
+              .selectAll("td")
+              .attr("class", function (d,i,row) {
+			  console.log(d,i)
+		  if(i % 2 == 0){return "odd";}
+		  else return "even";});
+
+          });
+
+      });
+	  
+	  
+    </script> 
+  </body>
+</html>
