@@ -1,51 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="utf-8">
+	<style>
+	table { 
+		border-collapse: collapse; 
+	}
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+		background: #eee; 
+	}
+	td, th { 
+		padding: 6px; 
+		border: 1px solid #ccc;  
+	}
+	
+	th.des:after {
+      content: "\21E9";
+    }
+    
+    th.aes:after {
+      content: "\21E7";
+    }
+	</style>
   <body>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script>
 
-      d3.json("https://raw.githubusercontent.com/avt00/dvcourse/master/countries_2012.json", function(error, data){
-
-        var columns = Object.keys(data[0]);
-        
-
-
-        var table = d3.select("body").append("table"),
-          thead = table.append("thead")
-                       .attr("class", "thead");
-          tbody = table.append("tbody");
-
-        table.append("caption")
+	<div id="page-wrap">
+	</div>
+	<script src="http://d3js.org/d3.v4.min.js"></script>
+	<script>
+	  d3.json("https://raw.githubusercontent.com/avt00/dvcourse/master/countries_2012.json", function(error, data) {
+		  if (error) throw error;
+		  
+		  var sortAscending = true;
+		  var table = d3.select('#page-wrap').append('table');
+		  table.append("caption")
           .html("World Countries Ranking");
-
-        thead.append("tr").selectAll("th")
-          .data(columns)
-        .enter()
-          .append("th")
-          .text(function(d) { return d; })
-          .on("click", function(header, i) {
-            tbody.selectAll("tr").sort(function(a, b) {
-              return d3.descending(a[header], b[header]);
-            });
-          });
-
-        var rows = tbody.selectAll("tr.row")
-          .data(data)
-          .enter()
-          .append("tr").attr("class", "row");
-
-        var cells = rows.selectAll("td")
-          .data(function(row) {
-              return d3.range(Object.keys(row).length).map(function(column, i) {
-                  return row[Object.keys(row)[i]];
-              });
-          })
-          .enter()
-          .append("td")
-          .text(function(d) { return d; })
-
-      });
-    </script> 
-  </body>
+		  var titles = ["name","continent","gdp","life_expectancy", "population", "year"];
+		  var headers = table.append('thead').append('tr')
+		                   .selectAll('th')
+		                   .data(titles).enter()
+		                   .append('th')
+		                   .text(function (d) {
+			                    return d;
+		                    })
+		                   .on('click', function (header, i) {
+		                	   headers.attr('class', 'header');
+		                	   
+		                	   if (sortAscending) {
+							   rows.sort(function(a, b) { 
+								       if (a[header]<b[header]) {return d3.ascending(a[header], b[header]);}
+									   if (a[header]>b[header]) {return d3.ascending(a[header], b[header]);}
+									   if (a[header]=b[header]) {
+									      return d3.ascending(a['name'], b['name']);}
+							   });
+							   sortAscending = false;
+							   this.className = 'aes';}
+							   else {
+							   rows.sort(function(a, b) { 
+							      if (a[header]<b[header]) {return d3.descending(a[header], b[header]);}
+								  if (a[header]>b[header]) {return d3.descending(a[header], b[header]);}
+								  if (a[header]=b[header]) {
+								      return d3.descending(a['name'], b['name']);}
+								  });
+							   sortAscending = true;
+							   this.className = 'des';}
+		                	   
+		                   });
+		  
+		  var rows = table.append('tbody').selectAll('tr')
+		               .data(data).enter()
+		               .append('tr');
+					   
+		 var cells = rows.selectAll('td')
+		    .data(function (row) {
+		    	return titles.map(function (column, i) {
+					switch (titles[i]){
+			  case "life_expectancy":
+			      return {'value': d3.format(",.1f")(row[titles[i]]), 'name': column};
+				  break;
+			  case "population":
+			      return  {'value': d3.format(">,.0f")(row[titles[i]]), 'name': column};
+				  break;
+			  case "gdp":
+			      return {'value': d3.formatPrefix(",.0", 1e9)(row[titles[i]]), 'name': column};
+				  break;
+              default:
+			     return {'value': row[titles[i]], 'name': column};
+				 break;
+			 }
+		    	});
+		    }).enter()
+		    .append('td')
+		    .attr('data-th', function (d) {
+		    	return d.name;
+		    })
+		    .text(function (d) {
+		    	return d.value;
+		    })
+			.style("text-align", function (d,i) {
+		     if (i>1) return "right"
+			 else return "center";
+		  })
+          .on("mouseover", function(d, i) {
+            d3.select(this.parentNode)
+              .style("background-color", "#F3ED86");
+        
+          }).on("mouseout", function(d,i) {
+            d3.select(this.parentNode)
+              .style("background-color", null);});
+	  });
+	</script>
+</body>
 </html>
